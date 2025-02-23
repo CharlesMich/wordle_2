@@ -19,7 +19,12 @@ struct GameView: View {
                 GuessView(guess: $dm.guesses[3])
                 GuessView(guess: $dm.guesses[5])
             }
-            .frame(width: Global.boardWidth, height: 6 * Global.boardWidth / 6)
+            .frame(width: Global.boardWidth, height: 6 * Global.boardWidth / 5)
+            Spacer()
+            Keyboard()
+                .scaleEffect(Global.keyboardScale)
+                .padding(.top)
+            Spacer()
                 .navigationViewStyle(.stack)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -60,4 +65,5 @@ struct GameView: View {
 #Preview {
     GameView()
         .environmentObject(WordleDataModel())
+       
 }
