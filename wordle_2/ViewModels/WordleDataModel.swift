@@ -11,6 +11,9 @@ class WordleDataModel: ObservableObject {
     @Published var guesses: [Guess] = []
     
     var keyColors = [String: Color]()
+    var selectedWord = ""
+    var currentWord = ""
+    var tryIndex = 0
     
     init() {
         newGame()
@@ -18,6 +21,8 @@ class WordleDataModel: ObservableObject {
     
     func newGame() {
         populateDefaults()
+        selectedWord = Global.commonWords.randomElement()!
+        currentWord = ""
     }
     
     func populateDefaults() {
@@ -34,11 +39,19 @@ class WordleDataModel: ObservableObject {
     
 //    MARK: - Game Play
     func addToCurrentWord(_ letter: String) {
-        
+        currentWord += letter
     }
     
     func enterWord() {
         
+    }
+    
+    func removeLetterFromCurrentWord(){
+        
+    }
+    
+    func updateRow() {
+        let guessWord = currentWord.padding(toLength: 5, withPad: " ", startingAt: 0)
     }
     
     
