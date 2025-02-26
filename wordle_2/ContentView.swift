@@ -13,11 +13,11 @@ struct GameView: View {
         NavigationStack {
             Text("Hello World")
             VStack(spacing: 3) {
-                GuessView(guess: $dm.guesses[0])
-                GuessView(guess: $dm.guesses[1])
-                GuessView(guess: $dm.guesses[2])
-                GuessView(guess: $dm.guesses[3])
-                GuessView(guess: $dm.guesses[5])
+                ForEach(0...5, id: \.self) { index in
+                    GuessView(guess: $dm.guesses[0])
+                        .modifier(Shake(animatableData: CGFloat(dm.incorrectAttempts[index])))
+                }
+
             }
             .frame(width: Global.boardWidth, height: 6 * Global.boardWidth / 5)
             Spacer()
