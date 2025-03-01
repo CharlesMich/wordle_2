@@ -56,13 +56,27 @@ class WordleDataModel: ObservableObject {
     }
     
     func enterWord() {
-        if verifyWord() {
-            print("valid word")
+        if currentWord == selectedWord {
+            gameOver = true
+            print("You win")
+            setCurrentGuessColor()
+            inPlay = false
         } else {
-            withAnimation {
-                self.incorrectAttempts[tryIndex] += 1
+            if verifyWord() {
+                print("valid word")
+                setCurrentGuessColor()
+                tryIndex += 1
+                if tryIndex == 6 {
+                    gameOver = true
+                    inPlay = false
+                    print("You lose")
+                }
+            } else {
+                withAnimation {
+                    self.incorrectAttempts[tryIndex] += 1
+                }
+                incorrectAttempts[tryIndex] = 0
             }
-            incorrectAttempts[tryIndex] = 0
         }
     }
     
@@ -78,6 +92,10 @@ class WordleDataModel: ObservableObject {
     
     func verifyWord() -> Bool {
         UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: currentWord)
+    }
+    
+    func setCurrentGuessColor() {
+        
     }
     
     
