@@ -23,5 +23,4 @@ extension Color {
     static var systemBackground: Color {
         Color(.systemBackground)
     }
-    
 }

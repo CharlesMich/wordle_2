@@ -10,39 +10,38 @@ import SwiftUI
 struct GameView: View {
     @EnvironmentObject var dm: WordleDataModel
     var body: some View {
-        NavigationStack {
-            Text("Hello World")
-            VStack(spacing: 3) {
-                ForEach(0...5, id: \.self) { index in
-                    GuessView(guess: $dm.guesses[0])
-                        .modifier(Shake(animatableData: CGFloat(dm.incorrectAttempts[index])))
+        NavigationView {
+            VStack {
+                Spacer()
+                VStack(spacing: 3) {
+                    ForEach(0...5, id: \.self) { index in
+                        GuessView(guess: $dm.guesses[index])
+                            .modifier(Shake(animatableData: CGFloat(dm.incorrectAttempts[index])))
+                    }
                 }
-
+                .frame(width: Global.boardWidth, height: 6 * Global.boardWidth / 5)
+                Spacer()
+                Keyboard()
+                    .scaleEffect(Global.keyboardScale)
+                    .padding(.top)
+                Spacer()
             }
-            .frame(width: Global.boardWidth, height: 6 * Global.boardWidth / 5)
-            Spacer()
-            Keyboard()
-                .scaleEffect(Global.keyboardScale)
-                .padding(.top)
-            Spacer()
-                .navigationViewStyle(.stack)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading){
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-//                            follows
+                            
                         } label: {
                             Image(systemName: "questionmark.circle")
                         }
                     }
-                    ToolbarItem(placement: .principal){
+                    ToolbarItem(placement: .principal) {
                         Text("WORDLE")
                             .font(.largeTitle)
                             .fontWeight(.heavy)
-                            .foregroundStyle(.primary)
-                        
+                            .foregroundColor(.primary)
                     }
-                    ToolbarItem(placement: .navigationBarTrailing){
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
                             Button {
                                 
@@ -52,7 +51,7 @@ struct GameView: View {
                             Button {
                                 
                             } label: {
-                                Image(systemName: "gearshape.fill")
+                               Image(systemName: "gearshape.fill")
                             }
                         }
                     }

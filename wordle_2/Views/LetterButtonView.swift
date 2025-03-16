@@ -13,7 +13,7 @@ struct LetterButtonView: View {
     
     var body: some View {
         Button {
-            
+            dm.addToCurrentWord(letter)
         } label: {
             Text(letter)
                 .font(.system(size: 20))
